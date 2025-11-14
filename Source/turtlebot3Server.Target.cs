@@ -8,7 +8,7 @@ public class turtlebot3ServerTarget : TargetRules
 	public turtlebot3ServerTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Server;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
+		DefaultBuildSettings = BuildSettingsVersion.V6;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		ExtraModuleNames.AddRange( new string[] { "turtlebot3" } );
 	}

@@ -1,6 +1,8 @@
 [submodule "Plugins/rclUE"]
 	path = Plugins/rclUE
-	url = https://github.com/rapyuta-robotics/rclUE.git
+	url = https://github.com/Zartris/rclUE.git
+	branch = UE5.7_devel_jazzy
 [submodule "Plugins/RapyutaSimulationPlugins"]
 	path = Plugins/RapyutaSimulationPlugins
-	url = https://github.com/rapyuta-robotics/RapyutaSimulationPlugins.git
+	url = https://github.com/Zartris/RapyutaSimulationPlugins.git
+	branch = UE5.7
