@@ -13,6 +13,7 @@ UE Project which includes examples to use rclUE.
 | 5.3.2 | 22.04  | UE5_devel_humble     | UE5.3                          | jammy_UE5.3         |              |
 | 5.4.4 | 22.04  | UE5_devel_humble     | UE5.4.4                        | jammy_UE5.4         |              |
 | 5.5.3 | 22.04  | UE5.5_devel_humble   | UE5.5                          | jammy_UE5.5         |              |
+| 5.7.0 | 24.04  | UE5.7_devel_jazzy    | UE5.7                          | jazzy_UE5.7         |              |
 
 
 ## Maps
@@ -33,10 +34,14 @@ UE Project which includes examples to use rclUE.
 ## Setup and run
 * please check [Getting Started](https://rapyutasimulationplugins.readthedocs.io/en/doc_update/getting_started.html) as well.
 
-1.  Download UE5.1 for Linux by following [Unreal Engine for Linux](https://www.unrealengine.com/en-US/linux)
+1.  Download UE5 for Linux by following [Unreal Engine for Linux](https://www.unrealengine.com/en-US/linux)
 2.  Clone this repo : `git clone --recurse-submodules git@github.com:rapyuta-robotics/turtlebot3-UE.git`
 3.  Retrieve the large files : `git-lfs pull && git submodule foreach git-lfs pull`
-4.  Build and run
+4.  Install required system libraries (for rclUE plugin):
+    ```bash
+    sudo apt-get install -y libspdlog-dev libfmt-dev
+    ```
+5.  Build and run
     ```
     cd turtlebot3-UE
     export UE5_DIR=<path to UE5>
@@ -47,6 +52,23 @@ UE Project which includes examples to use rclUE.
 \* Since the prooject is set to use 
 [ROS2 with Discovery Server](https://docs.ros.org/en/humble/Tutorials/Advanced/Discovery-Server/Discovery-Server.html)
 to communicate with ROS2 Node in UE, you needs to execute `source turtlebot3_UE/fastdds_setup.sh`. You can run without server by `./run_editor.sh false`
+
+### Troubleshooting
+
+#### Missing library errors
+If you encounter an error like `The game module 'turtlebot3' could not be loaded`, check the editor logs for missing library errors. The rclUE plugin requires `libspdlog.so.1.12` and `libfmt.so.9` to be installed on your system.
+
+Install them with:
+```bash
+sudo apt-get install -y libspdlog-dev libfmt-dev
+```
+
+On some systems, you may need to create symlinks if the version numbers don't match:
+```bash
+cd /lib/x86_64-linux-gnu
+sudo ln -s libspdlog.so.X.Y libspdlog.so.1.12
+sudo ln -s libfmt.so.X libfmt.so.9
+```
 
 
 ## Install pre-commit
@@ -65,8 +87,9 @@ this will setup pre-commit to all submodules as well.
 
 ### Installation
 
-1. [Install ROS2 humble](https://docs.ros.org/en/humble/Installation.html)
-    * you can use ROS2 humble as well by checkout `Plugins/rclUE` to `UE5_devel_humble` branch.
+1. [Install ROS2 humble](https://docs.ros.org/en/humble/Installation.html) or [Install ROS2 jazzy](https://docs.ros.org/en/jazzy/Installation.html)
+    * For UE 5.7 with Ubuntu 24.04, use ROS2 jazzy and checkout `Plugins/rclUE` to `UE5.7_devel_jazzy` branch.
+    * For earlier versions, you can use ROS2 humble by checking out `Plugins/rclUE` to `UE5_devel_humble` branch.
 2. [Install Nav2](https://navigation.ros.org/getting_started/index.html)
 
 ### Run
